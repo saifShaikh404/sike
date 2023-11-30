@@ -2,6 +2,12 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 dotenv.config();
 
 // DataBase connection
@@ -20,9 +26,7 @@ app.use(express.json())
 app.use('/', dataRouter);
 app.use(express.static('build'))
 app.get('*', (req, res) => {
-    const indexPath = path.join(__dirname, 'build', 'index.html');
-    console.log('Serving index.html from:', indexPath);
-    res.sendFile(indexPath);
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 app.listen(process.env.PORT, () => {

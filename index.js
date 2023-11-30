@@ -20,7 +20,9 @@ app.use(express.json())
 app.use('/', dataRouter);
 app.use(express.static('build'))
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    const indexPath = path.join(__dirname, 'build', 'index.html');
+    console.log('Serving index.html from:', indexPath);
+    res.sendFile(indexPath);
 });
 
 app.listen(process.env.PORT, () => {

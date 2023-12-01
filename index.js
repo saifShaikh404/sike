@@ -27,6 +27,7 @@ app.use('/', dataRouter);
 app.use(express.static('build'))
 app.get("*.css", (req, res, next) => {
   res.contentType("text/css");
+    next();
 });
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
